@@ -12,16 +12,21 @@ import NavBar from './components/NavBar.vue';
 
   </header>
 
-  <main>
+  <main class="main">
     <p>----------------------</p>
     <!-- <TheWelcome /> -->
+     kajlkdsjsalkj
+     <router-view></router-view>
   </main>
 </template>
 
 <style scoped>
 
-
 .header {
   /* border: 2px solid red; */
 }
+.main{
+  background-color: red;
+}
+
 </style>

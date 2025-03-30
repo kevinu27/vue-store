@@ -1,11 +1,14 @@
 import './assets/main.css'
 
 import { createApp } from 'vue'
-import { createPinia } from 'pinia';
+import { createPinia } from 'pinia'
 import App from './App.vue'
+import router from './router'
 
-const app = createApp(App);
-const pinia = createPinia();
+const app = createApp(App)
+const pinia = createPinia()
 
-app.use(pinia); // Registramos Pinia como store global
-app.mount('#app');
+app.use(pinia) // Registramos Pinia como store global
+app.use(router)
+app.mount('#app')
+

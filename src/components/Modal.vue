@@ -7,6 +7,7 @@
             <div class="inputs">
                 <input v-model="email">
                 <input v-model="password">
+                <div > <p @click="goToRegister">Not registered yet?</p></div>
             </div>
           <button class="login-click" @click="loginClick">Login</button>
           <button class="login-click" @click="loginClickAxios">loginClickAxios</button>
@@ -79,6 +80,9 @@ import axios from 'axios'
         // const API_URL = "http://127.0.0.1:5000"
 
         this.authStore.loginIn(this.email, this.password)
+      },
+      goToRegister(){
+        console.log('goToRegister')
       }
     }
   };

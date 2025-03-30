@@ -43,9 +43,14 @@ export default {
     <div> ubicación</div>
     <div @click="ShowLoginRegister()"> tu cuenta/logea popover</div>
     <div> pedidos</div>
+    <div v-if="authStore.userName"> {{ authStore.userName }}</div>
     <div> cart</div>
+    <div v-if="authStore.isAuthenticated" @click="authStore.logout"> Logout</div>
     <Modal  v-if="authStore.loginModal" >
     </Modal>
+
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
 
   </div>
 </template>

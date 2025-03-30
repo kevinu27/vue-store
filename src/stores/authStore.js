@@ -6,7 +6,8 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: null,
     isAuthenticated: false,
-    loginModal: false
+    loginModal: false,
+    userName: null
   }),
   actions: {
     login(userData) {
@@ -16,6 +17,8 @@ export const useAuthStore = defineStore('auth', {
     logout() {
       this.user = null;
       this.isAuthenticated = false;
+      localStorage.removeItem("jwt")
+      this.userName = null;
     },
     ShowloginModal() {
       console.log('en el store en la funcion ShowloginModal')
@@ -32,7 +35,8 @@ export const useAuthStore = defineStore('auth', {
             this.responseMessage = 'Form submitted successfully!'
             console.log('response.data.access_token', response.data.access_token)
             localStorage.setItem("jwt", response.data.access_token)
-
+            this.userName = response.data.username
+            this.isAuthenticated = true
         } catch (error) {
             console.error('Error submitting form:', error)
             this.responseMessage = 'Failed to submit the form.'
@@ -56,10 +60,12 @@ export const useAuthStore = defineStore('auth', {
     
         if (response.ok) {
             const userData = await response.json();
-            document.getElementById("auth-status").innerText = `Authenticated ✅ (User: ${userData.username})`
+            this.userName = userData.username
+            this.isAuthenticated = true;
+            
         } else {
-            localStorage.removeItem("jwt");  // Remove invalid token
-            document.getElementById("auth-status").innerText = "Not Authenticated ❌"
+            localStorage.removeItem("jwt")  // Remove invalid token
+            console.log( "Not Authenticated ❌")
         }
 
     }
