@@ -40,7 +40,7 @@ h3 {
   margin-bottom: 0.4rem;
   color: var(--color-heading);
 }
-
+/* 
 @media (min-width: 1024px) {
   .item {
     margin-top: 0;
@@ -83,5 +83,5 @@ h3 {
   .item:last-of-type:after {
     display: none;
   }
-}
+} */
 </style>

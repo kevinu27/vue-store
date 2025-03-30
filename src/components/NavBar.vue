@@ -18,9 +18,20 @@ export default {
 
     ShowLoginRegister() {
       console.log('ShowLoginRegister')
-      // this.showModal = !this.showModal
       this.authStore.ShowloginModal()
     }
+  },
+  mounted() {
+    console.log('------------------------onMounted')
+    const token = localStorage.getItem("jwt")
+            if (token) {
+                console.log("authenticad")
+              this.authStore.getUserData()
+            } else {
+              console.log("No authenticad")
+
+            }
+
   }
 };
 </script>
@@ -56,12 +67,12 @@ h3 {
   text-align: center;
 }
 
-@media (min-width: 1024px) {
+/* @media (min-width: 1024px) {
   .greetings h1,
   .greetings h3 {
     text-align: left;
   }
-}
+} */
 
 .nav-bar {
   display: flex;
