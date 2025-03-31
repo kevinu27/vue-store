@@ -1,25 +1,29 @@
 <script>
 import Modal from './Modal.vue'
-import { useAuthStore } from '@/stores/authStore';
-
+import { useAuthStore } from '@/stores/authStore'
+import PopoverUser from "./PopoverUser.vue"
 
 // return { authStore };
 
 export default {
-  components: { Modal },
+  components: { Modal, PopoverUser },
   data() {
     return {
       authStore: useAuthStore() // Inicializamos el store en data()
-    };
+    }
   },
 
 
   methods: {
 
-    ShowLoginRegister() {
-      console.log('ShowLoginRegister')
-      this.authStore.ShowloginModal()
-    }
+    // ShowLoginRegister() {
+    //   console.log('ShowLoginRegister')
+    //   this.authStore.ShowloginModal()
+    // },
+     navigateTo(path) {
+      console.log('navigateto')
+      this.$router.push(path)
+}
   },
   mounted() {
     console.log('------------------------onMounted')
@@ -38,19 +42,18 @@ export default {
 <template>
   <div class="nav-bar">
 
-    <div> LOGO</div>
+    <div @click="navigateTo('/')"> LOGO</div>
     <div> barra de busquedad</div>
     <div> ubicación</div>
-    <div @click="ShowLoginRegister()"> tu cuenta/logea popover</div>
+    <!-- <div @click="ShowLoginRegister()"> tu cuenta/logea popover</div> -->
     <div> pedidos</div>
-    <div v-if="authStore.userName"> {{ authStore.userName }}</div>
+    <!-- <div v-if="authStore.userName"> {{ authStore.userName }}</div> -->
     <div> cart</div>
-    <div v-if="authStore.isAuthenticated" @click="authStore.logout"> Logout</div>
     <Modal  v-if="authStore.loginModal" >
     </Modal>
-
-    <router-link to="/">Home</router-link> |
+    <PopoverUser></PopoverUser>
     <router-link to="/about">About</router-link>
+    <div v-if="authStore.isAuthenticated" @click="authStore.logout"> Logout</div>
 
   </div>
 </template>
@@ -82,5 +85,8 @@ h3 {
 .nav-bar {
   display: flex;
   justify-content: space-around;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 </style>
