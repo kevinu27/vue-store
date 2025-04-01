@@ -37,6 +37,7 @@ export const useAuthStore = defineStore('auth', {
             localStorage.setItem("jwt", response.data.access_token)
             this.userName = response.data.username
             this.isAuthenticated = true
+            this.ShowloginModal()
         } catch (error) {
             console.error('Error submitting form:', error)
             this.responseMessage = 'Failed to submit the form.'

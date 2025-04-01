@@ -2,11 +2,12 @@
 import Modal from './Modal.vue'
 import { useAuthStore } from '@/stores/authStore'
 import PopoverUser from "./PopoverUser.vue"
+import Cart from './Cart.vue';
 
 // return { authStore };
 
 export default {
-  components: { Modal, PopoverUser },
+  components: { Modal, PopoverUser, Cart },
   data() {
     return {
       authStore: useAuthStore() // Inicializamos el store en data()
@@ -46,14 +47,13 @@ export default {
     <div> barra de busquedad</div>
     <div> ubicación</div>
     <!-- <div @click="ShowLoginRegister()"> tu cuenta/logea popover</div> -->
-    <div> pedidos</div>
     <!-- <div v-if="authStore.userName"> {{ authStore.userName }}</div> -->
-    <div> cart</div>
     <Modal  v-if="authStore.loginModal" >
     </Modal>
     <PopoverUser></PopoverUser>
     <router-link to="/about">About</router-link>
-    <div v-if="authStore.isAuthenticated" @click="authStore.logout"> Logout</div>
+    <Cart></Cart>
+
 
   </div>
 </template>
