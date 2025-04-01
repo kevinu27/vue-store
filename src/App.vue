@@ -1,5 +1,4 @@
 <script setup>
-import TheWelcome from './components/TheWelcome.vue'
 import NavBar from './components/NavBar.vue';
 </script>
 
@@ -13,9 +12,8 @@ import NavBar from './components/NavBar.vue';
   </header>
 
   <main class="main">
-    <p>----------------------</p>
-    <!-- <TheWelcome /> -->
-     kajlkdsjsalkj
+    <!-- <p>----------------------</p> -->
+     
      <router-view></router-view>
   </main>
 </template>
@@ -26,7 +24,8 @@ import NavBar from './components/NavBar.vue';
   /* border: 2px solid red; */
 }
 .main{
-  background-color: red;
+  /* background-color: red; */
+  border: 2px solid red;
 }
 
 </style>
