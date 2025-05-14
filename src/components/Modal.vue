@@ -9,8 +9,8 @@
                 <input v-model="password">
                 <div > <p @click="goToRegister">Not registered yet?</p></div>
             </div>
-          <button class="login-click" @click="loginClick">Login</button>
-          <button class="login-click" @click="loginClickAxios">loginClickAxios</button>
+          <!-- <button class="login-click" @click="loginClick">Login</button>
+          <button class="login-click" @click="loginClickAxios">loginClickAxios</button> -->
           <button class="login-click" @click="loginStore">loginStore</button>
         </div>
       </div>
@@ -36,49 +36,46 @@ import axios from 'axios'
             console.log('closing modal')
             this.authStore.ShowloginModal()
       },
-      async  loginClick(){
-        console.log(this.email)
-        console.log(this.password)
-        const username= this.email 
-        const password=this.password 
-        const loginForm ={ username: this.email, password: this.password }
-        const API_URL = "http://127.0.0.1:5000"
+      // async  loginClick(){
+      //   console.log(this.email)
+      //   console.log(this.password)
+      //   const username= this.email 
+      //   const password=this.password 
+      //   const loginForm ={ username: this.email, password: this.password }
+      //   const API_URL = "http://127.0.0.1:5000"
 
-        const response = await fetch(`${API_URL}/login`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ username, password })
-            })
+      //   const response = await fetch(`${API_URL}/login`, {
+      //           method: "POST",
+      //           headers: { "Content-Type": "application/json" },
+      //           body: JSON.stringify({ username, password })
+      //       })
 
-            const data = await response.json()
-            console.log('data-----', data)
-            if (data.access_token) {
-                localStorage.setItem("jwt", data.access_token)
-                alert("Login successful!")
-            } else {
-                alert("Login failed!")
-            }
-      },
+      //       const data = await response.json()
+      //       console.log('data-----', data)
+      //       if (data.access_token) {
+      //           localStorage.setItem("jwt", data.access_token)
+      //           alert("Login successful!")
+      //       } else {
+      //           alert("Login failed!")
+      //       }
+      // },
 
-      async  loginClickAxios(){
-        const loginForm ={ username: this.email, password: this.password }
-        const API_URL = "http://127.0.0.1:5000"
+      // async  loginClickAxios(){
+      //   const loginForm ={ username: this.email, password: this.password }
+      //   const API_URL = "http://127.0.0.1:5000"
 
-        try {
-            const response = await axios.post(`${API_URL}/login`, loginForm)
-            console.log('Response:', response.data)
-            localStorage.setItem("jwt", response.access_token)
+      //   try {
+      //       const response = await axios.post(`${API_URL}/login`, loginForm)
+      //       console.log('Response:', response.data)
+      //       localStorage.setItem("jwt", response.access_token)
 
-            this.responseMessage = 'Form submitted successfully!'
-        } catch (error) {
-            console.error('Error submitting form:', error)
-            this.responseMessage = 'Failed to submit the form.'
-      }
-      },
+      //       this.responseMessage = 'Form submitted successfully!'
+      //   } catch (error) {
+      //       console.error('Error submitting form:', error)
+      //       this.responseMessage = 'Failed to submit the form.'
+      // }
+      // },
       async  loginStore(){
-        // const loginForm ={ username: this.email, password: this.password }
-        // const API_URL = "http://127.0.0.1:5000"
-
         this.authStore.loginIn(this.email, this.password)
       },
       goToRegister(){

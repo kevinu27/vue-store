@@ -8,7 +8,7 @@ export default {
   components: {},
   data() {
     return {
-      authStore: useAuthStore(), // Inicializamos el store en data()
+      authStore: useAuthStore(),
       ProductCategories: ['All', 'Electronic','Computers', 'Home', 'Books']
     }
   },

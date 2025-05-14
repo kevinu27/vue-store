@@ -12,9 +12,11 @@
   
     <div v-if="isPopoverVisible" class="popover">
       <div class="popover-arrow"></div>
-      <div @click="ShowLoginRegister()" v-if="!authStore.userName">Identificate</div>
+      <div @click="ShowLoginRegister()" v-if="!authStore.isAuthenticated">Identificate</div>
+
       <div>Mi cuenta</div>
-    <div v-if="authStore.isAuthenticated" @click="authStore.logout"> Logout</div>
+
+      <div v-if="authStore.isAuthenticated" @click="authStore.logout"> Logout</div>
 
       <div>Pedidos</div>
 
