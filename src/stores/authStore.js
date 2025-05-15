@@ -43,6 +43,20 @@ export const useAuthStore = defineStore('auth', {
             this.responseMessage = 'Failed to submit the form.'
       } 
     },
+    async registerIn(username, password){
+      const registerForm ={ username: username, password: password}
+      const API_URL = "http://127.0.0.1:5000"
+
+      try {
+          const response = await axios.post(`${API_URL}/register`, registerForm)
+          console.log('Response:---', response)
+          this.responseMessage = 'Form submitted successfully!'
+
+      } catch (error) {
+          console.error('Error submitting form:', error)
+          this.responseMessage = 'Failed to submit the form.'
+    } 
+  },
     async getUserData(){
         console.log('----getUserData-----')
         const token = localStorage.getItem("jwt")
