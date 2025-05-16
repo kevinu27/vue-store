@@ -12,13 +12,13 @@
     </div>
 
 
-    <div>
+    <div v-if="!settingsStore.userSettings.isSeller">
       want to be a seller? 
       <button @click="setAsSeller">
         start now
       </button>
     </div>
-    <div>
+    <div v-if="settingsStore.userSettings.isSeller">
       <p>create an store </p>      
       <button>
         +

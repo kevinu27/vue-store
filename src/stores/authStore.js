@@ -8,7 +8,8 @@ export const useAuthStore = defineStore('auth', {
     user: null,
     isAuthenticated: false,
     loginModal: false,
-    email: null
+    email: null,
+    id: null
   }),
   actions: {
     login(userData) {
@@ -20,6 +21,7 @@ export const useAuthStore = defineStore('auth', {
       this.isAuthenticated = false;
       localStorage.removeItem("jwt")
       this.email = null;
+      this.id = null;
     },
     ShowloginModal() {
       console.log('en el store en la funcion ShowloginModal')
@@ -37,8 +39,11 @@ export const useAuthStore = defineStore('auth', {
             this.responseMessage = 'Form submitted successfully!'
             console.log('response.data.access_token', response.data.access_token)
             localStorage.setItem("jwt", response.data.access_token)
+            this.id = response.data.user_id
             this.email = response.data.email
-            console.log('----response.data.email****', response.data.email)
+            console.log('----response.data.id - this.id ****',this.id )
+            const userSettings = userSettingsStore()
+            userSettings.getSettings(this.id)
             this.isAuthenticated = true
             this.ShowloginModal()
 
