@@ -1,6 +1,7 @@
 <script>
 import Modal from './Modal.vue'
 import { useAuthStore } from '@/stores/authStore'
+import { userSettingsStore } from '@/stores/userSettingsStore'
 import PopoverUser from "./PopoverUser.vue"
 import Cart from './Cart.vue';
 import SearchBar from './SearchBar.vue';
@@ -11,7 +12,8 @@ export default {
   components: { Modal, PopoverUser, Cart, SearchBar },
   data() {
     return {
-      authStore: useAuthStore() // Inicializamos el store en data()
+      authStore: useAuthStore(), // Inicializamos el store en data()
+      userSettingsStore: userSettingsStore() // Inicializamos el store en data()
     }
   },
 
@@ -29,13 +31,15 @@ export default {
   },
   mounted() {
     console.log('------------------------onMounted')
+    console.log('------------------------ver si tiene token para ver si está logueado')
     const token = localStorage.getItem("jwt")
             if (token) {
-                console.log("authenticad")
+              console.log("authenticad")
               this.authStore.getUserData()
+              console.log('------------------------estando logueado pedir los datos')
+              this.userSettingsStore.getSettings()
             } else {
               console.log("No authenticad")
-
             }
 
   }

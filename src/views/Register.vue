@@ -6,8 +6,13 @@
             <div class="inputs">
                 <input v-model="email">
                 <input v-model="password">
-                <input v-model="bussineType" placeholder="bussineType"> <!-- si es store o si es cliente -->
-
+                <!-- <input v-model="bussineType" placeholder="bussineType"> si es store o si es cliente -->
+                <label for="miSelect">tipo de usuario:</label>
+                <select id="miSelect" v-model="userType">
+                  <option value="vendedor">vendedor</option>
+                  <option value="comprador">comprador</option>
+                </select>
+                <p>Opción elegida: {{ userType }}</p>
                 <div > <p @click="goToRegister" :style="{ cursor: 'pointer' }">Not registered yet?</p></div>
             </div>
           <button class="login-click" @click="register" >Register</button>
@@ -17,6 +22,7 @@
 
 <script>
 import { useAuthStore } from '@/stores/authStore';
+import { userSettingsStore } from '@/stores/userSettingsStore';
 import axios from 'axios'
 
   export default {
@@ -25,14 +31,16 @@ import axios from 'axios'
       authStore: useAuthStore(), // Inicializamos el store en data()
       email: "",
       password: "",
-      bussineType: ''
+      userType: ""
     };
   },
 
     methods: {
       register() {
             console.log('registering...')
-            this.authStore.registerIn(this.email, this.password)
+
+            this.authStore.registerIn(this.email, this.password, this.userType)
+            this.$router.push("/")
       },
       
     }

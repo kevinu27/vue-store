@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import axios from 'axios'
+import { userSettingsStore } from '@/stores/userSettingsStore'
  
 
 export const useAuthStore = defineStore('auth', {
@@ -7,7 +8,7 @@ export const useAuthStore = defineStore('auth', {
     user: null,
     isAuthenticated: false,
     loginModal: false,
-    userName: null
+    email: null
   }),
   actions: {
     login(userData) {
@@ -18,16 +19,17 @@ export const useAuthStore = defineStore('auth', {
       this.user = null;
       this.isAuthenticated = false;
       localStorage.removeItem("jwt")
-      this.userName = null;
+      this.email = null;
     },
     ShowloginModal() {
       console.log('en el store en la funcion ShowloginModal')
       this.loginModal= !this.loginModal
   },
 
-   async loginIn(username, password){
-        const loginForm ={ username: username, password: password}
+   async loginIn(email, password){
+        const loginForm ={ email: email, password: password}
         const API_URL = "http://127.0.0.1:5000"
+        console.log('loginForm', loginForm)
 
         try {
             const response = await axios.post(`${API_URL}/login`, loginForm)
@@ -35,16 +37,18 @@ export const useAuthStore = defineStore('auth', {
             this.responseMessage = 'Form submitted successfully!'
             console.log('response.data.access_token', response.data.access_token)
             localStorage.setItem("jwt", response.data.access_token)
-            this.userName = response.data.username
+            this.email = response.data.email
+            console.log('----response.data.email****', response.data.email)
             this.isAuthenticated = true
             this.ShowloginModal()
+
         } catch (error) {
             console.error('Error submitting form:', error)
             this.responseMessage = 'Failed to submit the form.'
       } 
     },
-    async registerIn(username, password){
-      const registerForm ={ username: username, password: password}
+    async registerIn(email, password, userType){
+      const registerForm ={ email: email, password: password, userType: userType}
       const API_URL = "http://127.0.0.1:5000"
 
       try {
@@ -65,6 +69,8 @@ export const useAuthStore = defineStore('auth', {
             console.log( "Not Authenticated ❌")
             return;
         }
+
+
         const API_URL = "http://127.0.0.1:5000"
         const response = await fetch(`${API_URL}/userData`, {  
             method: "GET",
@@ -75,7 +81,12 @@ export const useAuthStore = defineStore('auth', {
     
         if (response.ok) {
             const userData = await response.json();
-            this.userName = userData.username
+            this.email = userData.email
+            this.id = userData.id
+            console.log('userDatauserDatauserDatauserDatauserDatauserData', userData)
+            console.log('this.id---!!!!', this.id)
+            const userSettings = userSettingsStore()
+            userSettings.getSettings(this.id)
             this.isAuthenticated = true;
             
         } else {

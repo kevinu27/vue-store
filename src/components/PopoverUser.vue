@@ -5,8 +5,8 @@
     @mouseleave="trigger === 'hover' ? hidePopover() : null"
   >
   <div class="your-account">
-    <p v-if="authStore.userName" class="username"> Hola {{ authStore.userName }}</p>
-    <p :class="[!authStore.userName ? 'marginpopover' : null, 'account']"
+    <p v-if="authStore.email" class="username"> Hola {{ authStore.email }}</p>
+    <p :class="[!authStore.email ? 'marginpopover' : null, 'account']"
     > cuenta y pedidos <span class="dropdown-arrow">▼</span></p>
   </div>
   
@@ -14,7 +14,7 @@
       <div class="popover-arrow"></div>
       <div @click="ShowLoginRegister()" v-if="!authStore.isAuthenticated">Identificate</div>
 
-      <div>Mi cuenta</div>
+      <div @click="navigateToAccount()">Mi cuenta</div>
 
       <div v-if="authStore.isAuthenticated" @click="authStore.logout"> Logout</div>
 
@@ -56,6 +56,9 @@ import { useAuthStore } from '@/stores/authStore'
       console.log('ShowLoginRegister')
       this.authStore.ShowloginModal()
     },
+    navigateToAccount() {
+      this.$router.push('/account')
+}
     }
   };
   </script>
