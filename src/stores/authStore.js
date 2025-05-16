@@ -87,7 +87,7 @@ export const useAuthStore = defineStore('auth', {
         if (response.ok) {
             const userData = await response.json();
             this.email = userData.email
-            // this.id = userData.id
+            this.id = userData.id
             console.log('userDatauserDatauserDatauserDatauserDatauserData', userData)
             console.log('this.id---!!!!', userData.id)
             const userSettings = userSettingsStore()

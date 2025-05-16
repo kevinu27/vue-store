@@ -5,7 +5,7 @@
     @mouseleave="trigger === 'hover' ? hidePopover() : null"
   >
   <div class="your-account">
-    <p v-if="authStore.email" class="username"> Hola {{ authStore.email }}</p>
+    <p v-if="authStore.email" class="username"> Hola {{ authStore.email }} - {{ authStore.id }} </p>
     <p :class="[!authStore.email ? 'marginpopover' : null, 'account']"
     > cuenta y pedidos <span class="dropdown-arrow">▼</span></p>
   </div>

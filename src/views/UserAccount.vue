@@ -55,7 +55,8 @@ import { useAuthStore } from '@/stores/authStore';
         
       },
       setAsSeller(){
-        console.log('set as seller')
+        console.log('set as seller - this.authStore.id', this.authStore)
+        this.settingsStore.setSeller(this.authStore.id)
       }
     },
     mounted() {
