@@ -38,7 +38,8 @@ export const userSettingsStore = defineStore('userSettings', {
           const response = await axios.post(`${API_URL}/setseller`, {id:id})
           console.log('UserRoleSettings Response:', response);
           this.userSettings = response.data.roleSettings // Ojo: .data, no el response completo
-          this.isSeller = true
+          console.log('999999this.userSettings ---------this.userSettings ', this.userSettings )
+        //   this.isSeller = true
         } catch (error) {
           console.error('Error al obtener configuraciones:', error);
           this.responseMessage = 'No se pudo obtener la configuración del usuario.';

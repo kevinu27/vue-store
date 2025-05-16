@@ -5,7 +5,7 @@
     </div>
 
     <div class="account-inputs">
-      <input type="checkbox" v-model="settingsStore.userSettings.isSeller">
+      <!-- <input type="checkbox" v-model="settingsStore.userSettings.isSeller"> -->
       <input type="text" :placeholder="settingsStore.userSettings?.address ">
       {{ settingsStore.userSettings?.isSeller }}
       {{ settingsStore.userSettings?.address }}
