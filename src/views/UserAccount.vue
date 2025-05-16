@@ -3,7 +3,7 @@
       <h1>UserAccount Page</h1>
       <!-- <p>Welcome to the UserAccount page!22222</p> -->
     </div>
-    {{ userSettingsStore.userSettings.isSeller }}
+    {{ settingsStore.userSettings?.isSeller }}
     <!-- <div v-if="!userSettingsStore.userSettings.isSeller"> -->
       <div>
       want to be a seller? 
@@ -28,6 +28,7 @@ import axios from 'axios'
     data() {
     return {
       authStore: useAuthStore(), // Inicializamos el store en data()
+      settingsStore: userSettingsStore(), // Inicializamos el store en data()
       email: "",
       isSeller: false,
 
@@ -54,6 +55,7 @@ import axios from 'axios'
     },
     mounted() {
     console.log(`the component UserAccount is now mounted.`)
+    console.log(`the component UserAccount is now mounted -----settingsStore.`, this.settingsStore)
 
   }
   };
