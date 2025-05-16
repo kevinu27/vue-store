@@ -1,11 +1,18 @@
 <template>
     <div>
       <h1>UserAccount Page</h1>
-      <!-- <p>Welcome to the UserAccount page!22222</p> -->
+
     </div>
-    {{ settingsStore.userSettings?.isSeller }}
-    <!-- <div v-if="!userSettingsStore.userSettings.isSeller"> -->
-      <div>
+
+    <div class="account-inputs">
+      <input type="checkbox" v-model="settingsStore.userSettings.isSeller">
+      <input type="text" :placeholder="settingsStore.userSettings?.address ">
+      {{ settingsStore.userSettings?.isSeller }}
+      {{ settingsStore.userSettings?.address }}
+    </div>
+
+
+    <div>
       want to be a seller? 
       <button @click="setAsSeller">
         start now
@@ -22,7 +29,6 @@
 <script>
 import { userSettingsStore } from '@/stores/userSettingsStore';
 import { useAuthStore } from '@/stores/authStore';
-import axios from 'axios'
 
   export default {
     data() {
@@ -31,7 +37,6 @@ import axios from 'axios'
       settingsStore: userSettingsStore(), // Inicializamos el store en data()
       email: "",
       isSeller: false,
-
     };
   },
 
@@ -60,3 +65,13 @@ import axios from 'axios'
   }
   };
   </script>
+
+  <style scoped>
+  .account-inputs{
+    display: flex;
+    flex-direction: column;
+  }
+  .account-inputs input{
+    width: 20%;
+  }
+</style>
