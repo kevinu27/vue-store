@@ -20,23 +20,31 @@
     </div>
     <div v-if="settingsStore.userSettings.isSeller">
       <p>create an store </p>      
-      <button>
+      <button  @click="openCreateStoreMenu">
         +
       </button>
+      <div v-if="createStoreVisibility">
+        <input type="text" placeholder="Store name" v-model="storename">
+        <button @click="createStore">create</button>
+      </div>
     </div>
   </template>
 
 <script>
 import { userSettingsStore } from '@/stores/userSettingsStore';
 import { useAuthStore } from '@/stores/authStore';
+import { usestoreStore } from '@/stores/storeStore';
 
   export default {
     data() {
     return {
       authStore: useAuthStore(), // Inicializamos el store en data()
       settingsStore: userSettingsStore(), // Inicializamos el store en data()
+      storeStore: usestoreStore(), // Inicializamos el store en data()
       email: "",
       isSeller: false,
+      createStoreVisibility: false,
+      storename: null,
     };
   },
 
@@ -57,7 +65,15 @@ import { useAuthStore } from '@/stores/authStore';
       setAsSeller(){
         console.log('set as seller - this.authStore.id', this.authStore)
         this.settingsStore.setSeller(this.authStore.id)
-      }
+      },
+      openCreateStoreMenu(){
+        this.createStoreVisibility = true
+      },
+      createStore(){
+        console.log('creating store', this.storename)
+        this.storeStore.createStore(this.storename)
+
+      },
     },
     mounted() {
     console.log(`the component UserAccount is now mounted.`)

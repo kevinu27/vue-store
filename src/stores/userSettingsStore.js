@@ -13,6 +13,7 @@ export const userSettingsStore = defineStore('userSettings', {
       this.user = userData;
       this.isAuthenticated = true;
     },
+
     async getSettings(id) {
         if (!id) {
           console.warn("ID inválido para getSettings")

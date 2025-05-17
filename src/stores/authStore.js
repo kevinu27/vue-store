@@ -27,6 +27,9 @@ export const useAuthStore = defineStore('auth', {
       console.log('en el store en la funcion ShowloginModal')
       this.loginModal= !this.loginModal
   },
+    getUserId(){
+      return this.id
+  },
 
    async loginIn(email, password){
         const loginForm ={ email: email, password: password}
