@@ -29,7 +29,8 @@
       </div>
       <div>
         <h3>your stores</h3>
-        <div v-for="store in stores">
+        <!-- {{ this.storeStore.stores}} -->
+        <div v-for="store in this.storeStore.stores">
 
           {{ store.name}}
         </div>
