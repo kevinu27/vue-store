@@ -27,6 +27,13 @@
         <input type="text" placeholder="Store name" v-model="storename">
         <button @click="createStore">create</button>
       </div>
+      <div>
+        <h3>your stores</h3>
+        <div v-for="store in stores">
+
+          {{ store.name}}
+        </div>
+      </div>
     </div>
   </template>
 
@@ -45,6 +52,7 @@ import { usestoreStore } from '@/stores/storeStore';
       isSeller: false,
       createStoreVisibility: false,
       storename: null,
+      stores:[],
     };
   },
 
@@ -77,8 +85,10 @@ import { usestoreStore } from '@/stores/storeStore';
     },
     mounted() {
     console.log(`the component UserAccount is now mounted.`)
-    console.log(`the component UserAccount is now mounted -----settingsStore.`, this.settingsStore)
+    this.storeStore.getYourStores()
+    this.stores = this.storeStore.stores
 
+  
   }
   };
   </script>
