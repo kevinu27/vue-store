@@ -16,7 +16,7 @@
 
       <div @click="navigateToAccount()">Mi cuenta</div>
 
-      <div v-if="authStore.isAuthenticated" @click="authStore.logout"> Logout</div>
+      <div v-if="authStore.isAuthenticated" @click="logout"> Logout</div>
 
       <div>Pedidos</div>
 
@@ -51,6 +51,12 @@ import { useAuthStore } from '@/stores/authStore'
       },
       hidePopover() {
         this.isPopoverVisible = false;
+      },
+      logout() {
+        console.log('ogout')
+        this.authStore.logout()
+        this.$router.push('/')
+
       },
       ShowLoginRegister() {
       console.log('ShowLoginRegister')

@@ -29,11 +29,12 @@
       </div>
       <div>
         <h3>your stores</h3>
-        <!-- {{ this.storeStore.stores}} -->
-        <div v-for="store in this.storeStore.stores">
-
-          {{ store.name}}
+        <div class="store-cards">
+          <div v-for="store in this.storeStore.stores" class="store-card"  :key="store.id">
+            <StoreCard :store="store" />
+          </div>
         </div>
+
       </div>
     </div>
   </template>
@@ -42,6 +43,7 @@
 import { userSettingsStore } from '@/stores/userSettingsStore';
 import { useAuthStore } from '@/stores/authStore';
 import { usestoreStore } from '@/stores/storeStore';
+import StoreCard from '@/components/StoreCard.vue'
 
   export default {
     data() {
@@ -55,6 +57,9 @@ import { usestoreStore } from '@/stores/storeStore';
       storename: null,
       stores:[],
     };
+  },
+  components: {
+    StoreCard
   },
 
     methods: {
@@ -87,7 +92,6 @@ import { usestoreStore } from '@/stores/storeStore';
     mounted() {
     console.log(`the component UserAccount is now mounted.`)
     this.storeStore.getYourStores()
-    this.stores = this.storeStore.stores
 
   
   }
@@ -102,4 +106,8 @@ import { usestoreStore } from '@/stores/storeStore';
   .account-inputs input{
     width: 20%;
   }
+  .store-cards{
+    display: flex;
+  }
+
 </style>
