@@ -23,6 +23,12 @@ export default {
 
 <style scoped>
 .store-card{
+  border: 1px solid gray;
+  border-radius: 5px;
+  margin: 1rem;
+  padding: 1rem;
+  text-align: center;
+  min-width: 150px;
 
 }
 </style>

@@ -30,9 +30,10 @@
       <div>
         <h3>your stores</h3>
         <div class="store-cards">
-          <div v-for="store in this.storeStore.stores" class="store-card"  :key="store.id">
+          <!-- <div v-for="store in this.storeStore.stores" class="store-card carousel-item"  :key="store.id">
             <StoreCard :store="store" />
-          </div>
+          </div> -->
+          <Carrousell></Carrousell>
         </div>
 
       </div>
@@ -44,6 +45,7 @@ import { userSettingsStore } from '@/stores/userSettingsStore';
 import { useAuthStore } from '@/stores/authStore';
 import { usestoreStore } from '@/stores/storeStore';
 import StoreCard from '@/components/StoreCard.vue'
+import Carrousell from '@/components/Carrousell.vue'
 
   export default {
     data() {
@@ -59,7 +61,8 @@ import StoreCard from '@/components/StoreCard.vue'
     };
   },
   components: {
-    StoreCard
+    StoreCard,
+    Carrousell
   },
 
     methods: {
@@ -108,6 +111,11 @@ import StoreCard from '@/components/StoreCard.vue'
   }
   .store-cards{
     display: flex;
+    justify-content: space-around;
+    width: 100%;
+    border: 2px solid red;
+    flex-wrap: wrap;
+    /* height: 800px; */
   }
 
 </style>
