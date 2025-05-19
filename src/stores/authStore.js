@@ -70,7 +70,6 @@ export const useAuthStore = defineStore('auth', {
     } 
   },
     async getUserData(){
-        console.log('----getUserData-----')
         const token = localStorage.getItem("jwt")
     
         if (!token) {
@@ -91,8 +90,7 @@ export const useAuthStore = defineStore('auth', {
             const userData = await response.json();
             this.email = userData.email
             this.id = userData.id
-            console.log('userDatauserDatauserDatauserDatauserDatauserData', userData)
-            console.log('this.id---!!!!', userData.id)
+
             const userSettings = userSettingsStore()
             // userSettings.getSettings(this.id)
             userSettings.getSettings(userData.id)

@@ -19,25 +19,18 @@ export default {
 
 
   methods: {
-
-    // ShowLoginRegister() {
-    //   console.log('ShowLoginRegister')
-    //   this.authStore.ShowloginModal()
-    // },
      navigateTo(path) {
       console.log('navigateto')
       this.$router.push(path)
 }
   },
   mounted() {
-    console.log('------------------------onMounted')
-    console.log('------------------------ver si tiene token para ver si está logueado')
+    console.log('this.authStore.id NAVBAR',this.authStore.id)
     const token = localStorage.getItem("jwt")
             if (token) {
-              console.log("authenticad")
+              console.log("authenticado")
               this.authStore.getUserData()
-              console.log('------------------------estando logueado pedir los datos')
-              this.userSettingsStore.getSettings()
+              this.userSettingsStore.getSettings(this.authStore.id)
             } else {
               console.log("No authenticad")
             }

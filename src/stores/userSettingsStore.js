@@ -15,16 +15,15 @@ export const userSettingsStore = defineStore('userSettings', {
     },
 
     async getSettings(id) {
+        console.log('id getsettings id', id)
         if (!id) {
-          console.warn("ID inválido para getSettings")
+          console.log("ID inválido para getSettings")
           return;
         }
       
         try {
           const response = await axios.get(`http://127.0.0.1:5000/UserRoleSettings/${id}`)
-          console.log('UserRoleSettings Response:', response);
           this.userSettings = response.data.roleSettings // Ojo: .data, no el response completo
-        console.log(' this.userSettings---!!!----',  this.userSettings)
         } catch (error) {
           console.error('Error al obtener configuraciones:', error);
           this.responseMessage = 'No se pudo obtener la configuración del usuario.';

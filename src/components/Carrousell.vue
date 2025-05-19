@@ -5,7 +5,10 @@
     <div class="carousel-view">
       <div class="carousel-track" :style="{ transform: `translateX(${position}px)` }">
         <div v-for="store in this.storeStore.stores" class="store-card carousel-item"  :key="store.id">
-          {{ store.name }}
+          <div  @click="() => enterStore(store.id)">
+            {{ store.name }}
+
+          </div>
         </div>
       </div>
     </div>
@@ -21,7 +24,7 @@ import { usestoreStore } from '@/stores/storeStore';
 import StoreCard from '@/components/StoreCard.vue'
 
   export default {
-  name: 'NetflixCarousel',
+  name: 'Carousel',
   data() {
     return {
       items: Array.from({ length: 10 }, (_, i) => `Item ${i + 1}`),
@@ -34,11 +37,16 @@ import StoreCard from '@/components/StoreCard.vue'
   },
   methods: {
     scrollLeft() {
-      this.position = Math.min(this.position + this.itemWidth * this.visibleItems, 0);
+      this.position = Math.min(this.position + this.itemWidth * this.visibleItems, 0)
     },
     scrollRight() {
-      const maxScroll = -(this.itemWidth * (this.items.length - this.visibleItems));
-      this.position = Math.max(this.position - this.itemWidth * this.visibleItems, maxScroll);
+      const maxScroll = -(this.itemWidth * (this.items.length - this.visibleItems))
+      this.position = Math.max(this.position - this.itemWidth * this.visibleItems, maxScroll)
+    },
+    enterStore(id){
+      console.log('click en elstore card store.id', id)
+      this.$router.push(`/store/${id}`)
+
     }
   }
 };
@@ -49,11 +57,12 @@ import StoreCard from '@/components/StoreCard.vue'
 
 .carousel-container {
   position: relative;
-  width: 90%;
+  width: 100%;
   margin: auto;
   overflow: hidden;
-  background: #111;
+  /* background: #111; */
   padding: 20px 0;
+  border: 2px solid red;
 }
 
 .carousel-view {

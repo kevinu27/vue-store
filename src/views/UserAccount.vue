@@ -113,7 +113,7 @@ import Carrousell from '@/components/Carrousell.vue'
     display: flex;
     justify-content: space-around;
     width: 100%;
-    border: 2px solid red;
+    border: 2px solid green;
     flex-wrap: wrap;
     /* height: 800px; */
   }

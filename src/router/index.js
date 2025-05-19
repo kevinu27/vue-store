@@ -6,6 +6,7 @@ import About from '../views/About.vue'
 import CartView from '@/views/CartView.vue'
 import Register from '@/views/Register.vue'
 import UserAccount from '@/views/UserAccount.vue'
+import storeView from '@/views/storeView.vue'
 
 // Define routes
 const routes = [
@@ -13,7 +14,8 @@ const routes = [
   { path: '/about', component: About },
   { path: '/cart', component: CartView },
   { path: '/register', component: Register },
-  { path: '/account', component: UserAccount }
+  { path: '/account', component: UserAccount },
+  { path: '/store/:id', component: storeView }
 ]
 
 // Create the router instance
