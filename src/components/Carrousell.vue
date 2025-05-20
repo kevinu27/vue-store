@@ -33,7 +33,7 @@ import StoreCard from '@/components/StoreCard.vue'
       visibleItems: 3,
       storeStore: usestoreStore(), // Inicializamos el store en data()
 
-    };
+    }
   },
   methods: {
     scrollLeft() {
