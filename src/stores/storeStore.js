@@ -87,6 +87,35 @@ export const usestoreStore = defineStore('usestoreStore', {
           this.responseMessage = 'No se pudo crear la tienda.'
         }
       },
+      async createItem(itemInfo){
+        console.log('itemInfo en el store store', itemInfo)
+        const API_URL = "http://127.0.0.1:5000"
+        const token = localStorage.getItem("jwt")
+
+        const storeid = itemInfo.storeid
+        try {
+          const response = await axios.post(`${API_URL}/store/${storeid}/item`,
+            {                     
+              name: itemInfo.itemName, 
+              price: itemInfo.itemPrice, 
+              description: itemInfo.itemDescription,
+              store_id: storeid  },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+              }
+            }
+          )
+          console.log('Respuesta del backend:', response.data)
+          this.item = response.data
+          return response.data
+      
+        } catch (error) {
+          console.error('Error al crear la tienda:', error)
+          this.responseMessage = 'No se pudo crear el item.'
+        }
+      },
 
 }
 

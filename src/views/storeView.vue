@@ -4,7 +4,18 @@
       <p>Welcome to the Store page!</p>
       <div v-if="storeStore.store && storeStore.store.store">
         {{ storeStore.store.store.id }}
+        {{ storeStore.store.store.name }}
       </div>
+      <h3>Add item to the store</h3>
+      <button @click="addItem">+</button>
+      
+      <div v-if="addIsVisible">
+        <input type="text" placeholder="item name" v-model="itemName">
+        <input type="text" placeholder="item descripcion" v-model="itemDescription">
+        <input type="number"  placeholder="item price" v-model="itemPrice">
+        <button @click="createItem">add item</button>
+      </div>
+
     </div>
   </template>
 
@@ -16,12 +27,29 @@ import { usestoreStore } from '@/stores/storeStore';
   data() {
   return {
     storeStore: usestoreStore(),
-    store: null
+    store: null,
+    addIsVisible: false,
+    itemName: null,
+    itemDescription: null, 
+    itemPrice: null
   };
 },
-  methods: {
-    register() {
 
+  methods: {
+    addItem(){
+      console.log('add item')
+      this.addIsVisible = !this.addIsVisible
+    },
+    createItem(){
+      console.log('create item')
+      const itemInfo = {
+        storeid: this.$route.params.id,
+        itemName: this.itemName,
+        itemDescription: this.itemDescription, 
+        itemPrice: this.itemPrice
+      }
+      console.log('item bjetct',itemInfo)
+      this.storeStore.createItem(itemInfo)
     },
     
   },

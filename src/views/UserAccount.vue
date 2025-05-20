@@ -29,7 +29,7 @@
       </div>
       <div>
         <h3>your stores</h3>
-        <div class="store-cards">
+        <div class="store-cards" v-if="this.storeStore.stores.length > 0">
           <!-- <div v-for="store in this.storeStore.stores" class="store-card carousel-item"  :key="store.id">
             <StoreCard :store="store" />
           </div> -->
