@@ -97,7 +97,7 @@ export const useAuthStore = defineStore('auth', {
             this.isAuthenticated = true;
             
         } else {
-            localStorage.removeItem("jwt")  // Remove invalid token
+            // localStorage.removeItem("jwt")  // Remove invalid token
             console.log( "Not Authenticated ❌")
         }
 

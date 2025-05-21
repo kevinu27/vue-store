@@ -23,7 +23,7 @@
         <div v-for="item in this.storeStore.items" class="store-card carousel-item"  :key="item.id">
 
           <div class="itemcards">
-            <div class="itemcard">
+            <div class="itemcard" @click="()=> enterItem(item.id)">
             item: {{ item.name }}
             description:{{ item.description }}
             price: {{ item.price }}
@@ -67,6 +67,11 @@ import { usestoreStore } from '@/stores/storeStore';
       }
       console.log('item bjetct',itemInfo)
       this.storeStore.createItem(itemInfo)
+    },
+    enterItem(id){
+      console.log('enter item')
+      this.$router.push(`/item/${id}`)
+
     },
     
   },

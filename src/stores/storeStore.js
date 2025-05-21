@@ -10,6 +10,7 @@ export const usestoreStore = defineStore('usestoreStore', {
     stores: [],
     store: null,
     items: [],
+    item: null,
   }),
   actions: {
     login(userData) {
@@ -130,6 +131,26 @@ export const usestoreStore = defineStore('usestoreStore', {
           })
 
           this.items = response.data
+          console.log('this.items = response.data', response.data)
+          return response.data
+      
+        } catch (error) {
+          console.error('Error al crear la tienda:', error)
+          this.responseMessage = 'No se pudo crear la tienda.'
+        }
+      },
+      async getItem(itemid){
+        const API_URL = "http://127.0.0.1:5000"
+        const token = localStorage.getItem("jwt")
+
+        try {
+          const response = await axios.get(`${API_URL}/item/${itemid}`, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          })
+
+          this.item = response.data
           console.log('this.items = response.data', response.data)
           return response.data
       
