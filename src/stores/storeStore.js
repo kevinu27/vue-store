@@ -159,6 +159,30 @@ export const usestoreStore = defineStore('usestoreStore', {
           this.responseMessage = 'No se pudo crear la tienda.'
         }
       },
+      async updateItem(updatedItem){
+        console.log('update Item..............', updatedItem)
+
+        const API_URL = "http://127.0.0.1:5000"
+        const token = localStorage.getItem("jwt")
+
+
+        try {
+          const response = await axios.put(
+            `${API_URL}/item/${updatedItem.id}`,
+           updatedItem,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
+            }
+          );
+          console.log('Item actualizado:', response.data);
+          return response.data
+        } catch (error) {
+          console.error('Error al actualizar el item:', error.response?.data || error.message);
+        }
+
+      },
 
 }
 

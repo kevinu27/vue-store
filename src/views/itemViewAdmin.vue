@@ -32,7 +32,9 @@ import { usestoreStore } from '@/stores/storeStore';
     itemName: null,
     itemDescription: null, 
     itemPrice: null,
-    item: null
+    item: null,
+    updatedItem: null
+
   };
 },
 
@@ -45,6 +47,14 @@ import { usestoreStore } from '@/stores/storeStore';
       console.log('updateItem', this.storeStore.item.item.name)
       console.log('updateItem', this.storeStore.item.item.description)
       console.log('updateItem', this.storeStore.item.item.price)
+      const updatedItem = {
+        id:  this.$route.params.id,
+        name: this.storeStore.item.item.name,
+        description: this.storeStore.item.item.description,
+        price: this.storeStore.item.item.price
+      }
+      console.log('updateItem()()()()', updatedItem)
+      this.storeStore.updateItem(updatedItem)
     }
     
   },
