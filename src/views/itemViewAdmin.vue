@@ -4,12 +4,19 @@
       <p>Welcome to the Item admin page!</p>
      
       <div v-if="storeStore.item">
-
-      {{ storeStore.item.item.name }}
+        <label for="nombre">Nombre:</label>
+        <input type="text" v-model="storeStore.item.item.name ">
+        <label for="nombre">Descripcion:</label>
+        <input type="text" v-model="storeStore.item.item.description ">
+        <label for="nombre">price:</label>
+        <input type="number" v-model="storeStore.item.item.price ">
+      <!-- {{ storeStore.item.item.name }}
       {{ storeStore.item.item.description }}
-      {{ storeStore.item.item.price }}
+      {{ storeStore.item.item.price }} -->
 
      </div>
+
+     <button @click="updateItem"> actualizar</button>
 
     </div>
   </template>
@@ -34,7 +41,11 @@ import { usestoreStore } from '@/stores/storeStore';
       console.log('add item')
       this.addIsVisible = !this.addIsVisible
     },
-
+    updateItem(){
+      console.log('updateItem', this.storeStore.item.item.name)
+      console.log('updateItem', this.storeStore.item.item.description)
+      console.log('updateItem', this.storeStore.item.item.price)
+    }
     
   },
   mounted(){
