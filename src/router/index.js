@@ -7,6 +7,7 @@ import CartView from '@/views/CartView.vue'
 import Register from '@/views/Register.vue'
 import UserAccount from '@/views/UserAccount.vue'
 import storeView from '@/views/storeView.vue'
+import storeViewAdmin from '@/views/storeViewAdmin.vue'
 import itemViewAdmin from '@/views/itemViewAdmin.vue'
 
 // Define routes
@@ -16,7 +17,7 @@ const routes = [
   { path: '/cart', component: CartView },
   { path: '/register', component: Register },
   { path: '/account', component: UserAccount },
-  { path: '/store/:id', component: storeView },
+  { path: '/store/:id', component: storeViewAdmin },
   { path: '/item/:id', component: itemViewAdmin },
 
 ]

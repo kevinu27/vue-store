@@ -183,6 +183,31 @@ export const usestoreStore = defineStore('usestoreStore', {
         }
 
       },
+     async updateStore(updatedStore){
+
+        console.log('update Store..............', updatedStore)
+
+        const API_URL = "http://127.0.0.1:5000"
+        const token = localStorage.getItem("jwt")
+
+
+        try {
+          const response = await axios.put(
+            `${API_URL}/store/${updatedStore.id}`,
+            updatedStore,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
+            }
+          );
+          console.log('Store actualizado:', response.data);
+          return response.data
+        } catch (error) {
+          console.error('Error al actualizar el item:', error.response?.data || error.message);
+        }
+
+      }
 
 }
 

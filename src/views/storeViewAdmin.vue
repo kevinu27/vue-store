@@ -1,10 +1,16 @@
 <template>
   <div>
-    <h1>Store view Page</h1>
-    <p>Welcome to the Store page!</p>
+    <h1>StoreAdmin view Page</h1>
+    <p>Welcome to the Store Admin page!</p>
     <div v-if="storeStore.store && storeStore.store.store">
+
+        <label for="nombre">name:</label>
+        <input type="number" v-model="storeStore.store.store.name ">
+
       {{ storeStore.store.store.id }}
       {{ storeStore.store.store.name }}
+
+      <button @click="updateStore">update Store</button>
     </div>
     <h3>Add item to the store</h3>
     <button @click="addItem">+</button>
@@ -71,8 +77,20 @@ methods: {
   enterItem(id){
     console.log('enter item')
     this.$router.push(`/item/${id}`)
-
   },
+
+  updateStore(){
+    console.log('update store...........', this.storeStore.store.store.id)
+    console.log('update store...........', this.storeStore.store.store.name)
+
+    const updateStore = {
+      id:  this.$route.params.id,
+      name: this.storeStore.store.store.name
+    }
+
+    console.log('updateStore()()()()', updateStore)
+    this.storeStore.updateStore(updateStore)
+  }
   
 },
 mounted(){
