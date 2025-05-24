@@ -25,7 +25,7 @@ import NavBar from './components/NavBar.vue';
 }
 .main{
   /* background-color: red; */
-  border: 2px solid red;
+  /* border: 2px solid red; */
 }
 
 </style>

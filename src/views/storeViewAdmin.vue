@@ -5,7 +5,7 @@
     <div v-if="storeStore.store && storeStore.store.store">
 
         <label for="nombre">name:</label>
-        <input type="number" v-model="storeStore.store.store.name ">
+        <input type="text" v-model="storeStore.store.store.name ">
 
       {{ storeStore.store.store.id }}
       {{ storeStore.store.store.name }}
