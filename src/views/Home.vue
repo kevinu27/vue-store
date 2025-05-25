@@ -34,38 +34,37 @@ import axios from 'axios'
     itemspaginados: null,
     items:[],
     page: 1,
-    totalpages:2
+    totalpages:2,
+    loading: false,
   };
 },
 
   methods: {
     async getItemsLazyLoading(){
-      // console.log('getItemsLazyLoading............')
-      // this.addIsVisible = !this.addIsVisible
+
+      if (this.loading || this.page > this.totalpages) return
+      this.loading = true
+
       const API_URL = "http://127.0.0.1:5000"
       const token = localStorage.getItem("jwt")
       console.log('this.page', this.page)
 
-      if(this.page <= this.totalpages){
-            try {
-            // const authStore = useAuthStore() // ← aquí el cambio
-            // const userId = authStore.getUserId() // asegúrate de que esto exista
-        
-            const response = await axios.get(`${API_URL}/items_paginated?page=${this.page}&per_page=4 `)
-            // console.log('Respuesta del backend items lazy loading:', response.data.items) 
+          try {
+            const response = await axios.get(`${API_URL}/items_paginated?page=${this.page}&per_page=4`)
+            
             this.items.push(...response.data.items)
-            this.page = this.page + 1
-            this.totalpages= response.data.pages
+            this.totalpages = response.data.pages
+            this.page = this.page +1
             console.log('this.totalpages------------', this.totalpages)
             console.log('this.items----------', this.items)
             console.log('data----', response.data)
-            return response.data
-        
+            
           } catch (error) {
-            console.error('Error al crear la tienda:', error)
-            this.responseMessage = 'No se pudo crear la tienda.'
+            console.error('Error al obtener items:', error)
+          } finally {
+            this.loading = false; // 👈 Se reinicia siempre
           }
-        }
+        
 
     },
     handleScroll(){
