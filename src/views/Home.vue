@@ -33,33 +33,43 @@ import axios from 'axios'
     itemPrice: null,
     itemspaginados: null,
     items:[],
-    page: 0,
+    page: 1,
+    totalpages:2
   };
 },
 
   methods: {
     async getItemsLazyLoading(){
-      // console.log('add item')
+      // console.log('getItemsLazyLoading............')
       // this.addIsVisible = !this.addIsVisible
       const API_URL = "http://127.0.0.1:5000"
-        const token = localStorage.getItem("jwt")
-      
-        try {
-          // const authStore = useAuthStore() // ← aquí el cambio
-          // const userId = authStore.getUserId() // asegúrate de que esto exista
-      
-          const response = await axios.get(`${API_URL}/items_paginated?page=${this.page}&per_page=8`)
-          console.log('Respuesta del backend items lazy loading:', response.data.items)
-          this.items.push(...response.data.items)
-          return response.data
-      
-        } catch (error) {
-          console.error('Error al crear la tienda:', error)
-          this.responseMessage = 'No se pudo crear la tienda.'
+      const token = localStorage.getItem("jwt")
+      console.log('this.page', this.page)
+
+      if(this.page <= this.totalpages){
+            try {
+            // const authStore = useAuthStore() // ← aquí el cambio
+            // const userId = authStore.getUserId() // asegúrate de que esto exista
+        
+            const response = await axios.get(`${API_URL}/items_paginated?page=${this.page}&per_page=4 `)
+            // console.log('Respuesta del backend items lazy loading:', response.data.items) 
+            this.items.push(...response.data.items)
+            this.page = this.page + 1
+            this.totalpages= response.data.pages
+            console.log('this.totalpages------------', this.totalpages)
+            console.log('this.items----------', this.items)
+            console.log('data----', response.data)
+            return response.data
+        
+          } catch (error) {
+            console.error('Error al crear la tienda:', error)
+            this.responseMessage = 'No se pudo crear la tienda.'
+          }
         }
+
     },
     handleScroll(){
-      console.log('lazyloading....')
+      // console.log('lazyloading....')
       const el = this.$refs.scrollContainer
       if (!el) return
 
