@@ -3,10 +3,9 @@
       <h1>Home Page</h1>
       <p>Welcome to the Home page!</p>
       <p>Slider</p>
-      <p>Items</p>
       <div v-if="items">
         <div v-for="item in items" :key="item.id" class="item">
-          <div class="itemCard">
+          <div class="itemCard" @click="()=>navigateTo(item.id)">
 
             {{ item }}
           </div>
@@ -77,7 +76,10 @@ import axios from 'axios'
         this.getItemsLazyLoading()
       }
     },
+    navigateTo(id) {
+      this.$router.push(`/item/${id}`)
 
+    },
     
   },
    mounted(){

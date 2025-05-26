@@ -76,7 +76,7 @@ methods: {
   },
   enterItem(id){
     console.log('enter item')
-    this.$router.push(`/item/${id}`)
+    this.$router.push(`/item/admin/${id}`)
   },
 
   updateStore(){

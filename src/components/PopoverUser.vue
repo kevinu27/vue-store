@@ -14,11 +14,11 @@
       <div class="popover-arrow"></div>
       <div @click="ShowLoginRegister()" v-if="!authStore.isAuthenticated">Identificate</div>
 
-      <div @click="navigateToAccount()">Mi cuenta</div>
+      <div @click="()=> navigateTo('/account')">Mi cuenta</div>
 
       <div v-if="authStore.isAuthenticated" @click="logout"> Logout</div>
 
-      <div>Pedidos</div>
+      <div @click="()=> navigateTo('/orders')" >Pedidos</div>
 
     </div>
   
@@ -53,7 +53,7 @@ import { useAuthStore } from '@/stores/authStore'
         this.isPopoverVisible = false;
       },
       logout() {
-        console.log('ogout')
+        console.log('logout')
         this.authStore.logout()
         this.$router.push('/')
 
@@ -62,9 +62,9 @@ import { useAuthStore } from '@/stores/authStore'
       console.log('ShowLoginRegister')
       this.authStore.ShowloginModal()
     },
-    navigateToAccount() {
-      this.$router.push('/account')
-}
+    navigateTo(path) {
+      this.$router.push(path)
+    }
     }
   };
   </script>

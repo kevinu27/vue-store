@@ -9,6 +9,8 @@ import UserAccount from '@/views/UserAccount.vue'
 import storeView from '@/views/storeView.vue'
 import storeViewAdmin from '@/views/storeViewAdmin.vue'
 import itemViewAdmin from '@/views/itemViewAdmin.vue'
+import MyOrders from '@/views/MyOrders.vue'
+import itemView from '@/views/itemView.vue'
 
 // Define routes
 const routes = [
@@ -18,7 +20,9 @@ const routes = [
   { path: '/register', component: Register },
   { path: '/account', component: UserAccount },
   { path: '/store/:id', component: storeViewAdmin },
-  { path: '/item/:id', component: itemViewAdmin },
+  { path: '/item/:id', component: itemView },
+  { path: '/item/admin/:id', component: itemViewAdmin },
+  { path: '/orders', component: MyOrders },
 
 ]
 
