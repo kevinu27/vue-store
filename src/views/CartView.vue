@@ -1,21 +1,30 @@
 <template>
   <div>
-    <h1>Item admin view Page</h1>
-    <p>Welcome to the Item admin page!</p>
-    
+    <h1>Item Cart Page</h1>
+    <p>Welcome to the Item Cart page!</p>
 
+
+    <div v-for="item in storeStore.intemsInCart" :key="item.id">
+          <div class="item-card">
+            name: {{ item.name }}
+            description: {{ item.description }}
+            price: {{ item.price }}
+
+          </div>
+        </div>
 
   </div>
 </template>
 
 <script>
 import { cartStore } from '@/stores/cartStore';
-
+import { usestoreStore } from '@/stores/storeStore';
 
 export default {
   data() {
     return {
       cartStore: cartStore(),
+      storeStore: usestoreStore(),
       items: [],
 
       }
@@ -34,5 +43,7 @@ export default {
 </script>
 
 <style scoped>
-
+.item-card{
+  border: 2px solid red;
+}
 </style>
