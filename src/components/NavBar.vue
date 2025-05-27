@@ -2,6 +2,7 @@
 import Modal from './Modal.vue'
 import { useAuthStore } from '@/stores/authStore'
 import { userSettingsStore } from '@/stores/userSettingsStore'
+import { cartStore } from '@/stores/cartStore'
 import PopoverUser from "./PopoverUser.vue"
 import Cart from './Cart.vue';
 import SearchBar from './SearchBar.vue';
@@ -13,7 +14,8 @@ export default {
   data() {
     return {
       authStore: useAuthStore(), // Inicializamos el store en data()
-      userSettingsStore: userSettingsStore() // Inicializamos el store en data()
+      userSettingsStore: userSettingsStore(),
+      cartStore: cartStore()
     }
   },
 
@@ -24,18 +26,17 @@ export default {
       this.$router.push(path)
 }
   },
-  mounted() {
+ async mounted() {
     console.log('this.authStore.id NAVBAR',this.authStore.id)
     const token = localStorage.getItem("jwt")
-            if (token) {
-              console.log("authenticado")
-              this.authStore.getUserData()
-              this.userSettingsStore.getSettings(this.authStore.id)
-            } else {
-              console.log("No authenticad")
-            }
-
-  }
+    if (token) {
+      console.log("authenticado")
+      this.authStore.getUserData()
+      this.userSettingsStore.getSettings(this.authStore.id)
+    } else {
+      console.log("No authenticad")
+    }
+}
 };
 </script>
 <template>

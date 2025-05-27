@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import axios from 'axios'
 import { userSettingsStore } from '@/stores/userSettingsStore'
+import { cartStore } from './cartStore';
  
 
 export const useAuthStore = defineStore('auth', {
@@ -89,8 +90,10 @@ export const useAuthStore = defineStore('auth', {
         if (response.ok) {
             const userData = await response.json();
             this.email = userData.email
+            console.log('userData.id---------------------------------------------------------------', userData.id)
             this.id = userData.id
-
+            const cart = cartStore()
+            cart.getItemsInYourCart(userData.id)
             const userSettings = userSettingsStore()
             // userSettings.getSettings(this.id)
             userSettings.getSettings(userData.id)

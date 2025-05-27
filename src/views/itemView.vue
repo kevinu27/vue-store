@@ -33,7 +33,7 @@ import { cartStore } from '@/stores/cartStore';
   methods: {
     addToCart(){
       console.log('add item to cart')
-      this.cartStore.addToCart(this.storeStore.item.item.id)
+      this.cartStore.addToCart()
     },
     
   },

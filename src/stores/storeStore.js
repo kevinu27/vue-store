@@ -207,6 +207,31 @@ export const usestoreStore = defineStore('usestoreStore', {
           console.error('Error al actualizar el item:', error.response?.data || error.message);
         }
 
+      },
+      async getItemsByIds(itemIds){
+        const API_URL = "http://127.0.0.1:5000"
+        const token = localStorage.getItem("jwt")
+        console.log('------------------!!!!!!!!!!!!!!!!---------------')
+
+        try {
+          const response = await axios.post(
+            `${API_URL}//items_by_ids`,
+            {
+              item_ids: itemIds
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
+            }
+          );
+          console.log('Store actualizado:', response.data);
+          return response.data
+        } catch (error) {
+          console.error('Error al actualizar el item:', error.response?.data || error.message);
+        }
+
+     
       }
 
 }
