@@ -34,6 +34,7 @@ export default {
       removeItemFromCart(itemId){
         console.log('cart item removed', itemId)
         this.cartStore.removeItemInYourCart(itemId)
+        console.log('this.cartStore.removeItemInYourCart(itemId)', this.cartStore.removeItemInYourCart(itemId))
 
       },
 

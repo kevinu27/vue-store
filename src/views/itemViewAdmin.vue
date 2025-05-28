@@ -24,12 +24,14 @@
 
 <script>
 import { usestoreStore } from '@/stores/storeStore';
+import { cartStore } from '@/stores/cartStore';
 
 
   export default {
   data() {
   return {
     storeStore: usestoreStore(),
+    cartStorefunction: cartStore(),
     itemName: null,
     itemDescription: null, 
     itemPrice: null,
@@ -60,6 +62,7 @@ import { usestoreStore } from '@/stores/storeStore';
     deleteItem(){
       console.log('storeStore.item.item.id en el itemviewadmin', this.storeStore.item.item.id)
       this.storeStore.removeItem(this.storeStore.item.item.id)
+      this.$router.back()
     }
     
   },

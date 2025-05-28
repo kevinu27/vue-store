@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import axios from 'axios'
 import { useAuthStore } from '@/stores/authStore'
+import { cartStore } from './cartStore';
  
 
 export const usestoreStore = defineStore('usestoreStore', {
@@ -249,12 +250,10 @@ export const usestoreStore = defineStore('usestoreStore', {
             }
           })
           console.log('Respuesta del backend:', response.data)
-          // this.itemsIds = response.data.id_item
           console.log('response.date enel cartStore', response.data.id_item )
-          /////////////////////////
-          // const storeStore= usestoreStore()
-          // storeStore.getItemsByIds(this.itemsIds)
 
+          // const cartStoreFunction = cartStore()
+          // cartStoreFunction.removeItemInYourCart(response.data.id_item)
           return response.data
       
         } catch (error) {
