@@ -21,7 +21,7 @@ export default {
      navigateTo(path) {
       console.log('navigateto') // aqui poner la url lavista del compra
       this.$router.push(path)
-}
+    }
   },
   mounted() {
 

@@ -11,6 +11,7 @@ import storeViewAdmin from '@/views/storeViewAdmin.vue'
 import itemViewAdmin from '@/views/itemViewAdmin.vue'
 import MyOrders from '@/views/MyOrders.vue'
 import itemView from '@/views/itemView.vue'
+import Payment from '@/views/Payment.vue'
 
 // Define routes
 const routes = [
@@ -23,6 +24,7 @@ const routes = [
   { path: '/item/:id', component: itemView },
   { path: '/item/admin/:id', component: itemViewAdmin },
   { path: '/orders', component: MyOrders },
+  { path: '/payment', component: Payment },
 
 ]
 

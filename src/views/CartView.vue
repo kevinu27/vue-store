@@ -14,6 +14,13 @@
         </div>
 
   </div>
+
+  <div > cantidad total:{{ totalAmount }}</div>
+  <!-- <div> cantidad total:{{ storeStore.intemsInCart.map(item => item.price).reduce((acumulador, precioActual) => acumulador + precioActual, 0) }}</div> -->
+
+  <div>
+    <button @click="()=>navigateTo('payment')">proceder al pago</button>
+  </div>
 </template>
 
 <script>
@@ -26,7 +33,6 @@ export default {
       cartStore: cartStore(),
       storeStore: usestoreStore(),
       items: [],
-
       }
     },
 
@@ -37,10 +43,19 @@ export default {
         console.log('this.cartStore.removeItemInYourCart(itemId)', this.cartStore.removeItemInYourCart(itemId))
 
       },
+      navigateTo(path) {
+        console.log('navigateto')
+        this.$router.push(path)
+      }
 
     },
+    computed: {
+      totalAmount() {
+        return this.storeStore.intemsInCart.reduce((acc, item) => acc + item.price, 0);
+      }
+    },
     mounted(){
-
+      this.totalAmount = this.storeStore.intemsInCart.map(item => item.price).reduce((acumulador, precioActual) => acumulador + precioActual, 0)
 
     }
   };
