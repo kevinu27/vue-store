@@ -17,6 +17,7 @@
      </div>
 
      <button @click="updateItem"> actualizar</button>
+     <button @click="deleteItem"> Eliminar Item</button>
 
     </div>
   </template>
@@ -55,6 +56,10 @@ import { usestoreStore } from '@/stores/storeStore';
       }
       console.log('updateItem()()()()', updatedItem)
       this.storeStore.updateItem(updatedItem)
+    },
+    deleteItem(){
+      console.log('storeStore.item.item.id en el itemviewadmin', this.storeStore.item.item.id)
+      this.storeStore.removeItem(this.storeStore.item.item.id)
     }
     
   },

@@ -232,10 +232,39 @@ export const usestoreStore = defineStore('usestoreStore', {
         } catch (error) {
           console.error('Error al actualizar el item:', error.response?.data || error.message);
         }
+      },
+     async removeItem(id){
+        console.log('storeStore remove item id', id)
+        const API_URL = "http://127.0.0.1:5000"
+        const token = localStorage.getItem("jwt")
+      
+        try {
+          const authStore = useAuthStore() // ← aquí el cambio
+          const userId = authStore.getUserId() // asegúrate de que esto exista
+          
+          const response = await axios.delete(`${API_URL}/item/${id}`,  {
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
+            }
+          })
+          console.log('Respuesta del backend:', response.data)
+          // this.itemsIds = response.data.id_item
+          console.log('response.date enel cartStore', response.data.id_item )
+          /////////////////////////
+          // const storeStore= usestoreStore()
+          // storeStore.getItemsByIds(this.itemsIds)
 
-     
+          return response.data
+      
+        } catch (error) {
+          console.error('Error al traer los items:', error)
+          this.responseMessage = 'No se pudo traer los items del cart.'
+        }
       }
+    }
 
-}
+
+
 
 })
