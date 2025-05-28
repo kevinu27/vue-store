@@ -9,8 +9,8 @@
             name: {{ item.name }}
             description: {{ item.description }}
             price: {{ item.price }}
-
           </div>
+          <button @click="()=> removeItemFromCart(item.id)">Eliminar del carro</button>
         </div>
 
   </div>
@@ -31,7 +31,10 @@ export default {
     },
 
     methods: {
-      getCartItems(){
+      removeItemFromCart(itemId){
+        console.log('cart item removed', itemId)
+        this.cartStore.removeItemInYourCart(itemId)
+
       },
 
     },
