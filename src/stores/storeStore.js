@@ -12,7 +12,8 @@ export const usestoreStore = defineStore('usestoreStore', {
     store: null,
     items: [],
     item: null,
-    intemsInCart:[]
+    intemsInCart:[],
+    intemsInOrder:[],
   }),
   actions: {
     login(userData) {
@@ -227,9 +228,11 @@ export const usestoreStore = defineStore('usestoreStore', {
               }
             }
           );
-          console.log('items del cart:', response.data);
+          console.log('items del cart:', response.data)
           this.intemsInCart =response.data
+          this.intemsInOrder =response.data
           return response.data
+
         } catch (error) {
           console.error('Error al actualizar el item:', error.response?.data || error.message);
         }

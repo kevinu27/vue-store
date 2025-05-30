@@ -8,6 +8,7 @@ export const cartStore = defineStore('cartStore', {
   state: () => ({
     authStore: useAuthStore(),
     itemsIds: [],
+    itemsIdsinOrders:[],
   }),
   actions: {
   
@@ -83,6 +84,56 @@ export const cartStore = defineStore('cartStore', {
           })
           console.log('Respuesta del backend:', response.data)
           this.itemsIds = response.data.id_item
+          console.log('response.date enel cartStore', response.data.id_item )
+          /////////////////////////
+          const storeStore= usestoreStore()
+          storeStore.getItemsByIds(this.itemsIds)
+
+          return response.data
+      
+        } catch (error) {
+          console.error('Error al traer los items:', error)
+          this.responseMessage = 'No se pudo traer los items del cart.'
+        }
+
+      },
+      async placeOrder(){
+
+          const API_URL = "http://127.0.0.1:5000"
+          const token = localStorage.getItem("jwt")
+
+          try {
+            const response = await axios.post(
+              `${API_URL}/placeorder`,
+              { item_ids: this.itemsIds },
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`
+                }
+              }
+            );
+        
+            console.log('Order response:', response.data);
+            alert('Orden realizada con éxito');
+          } catch (error) {
+            console.error('Error al realizar la orden:', error.response?.data || error.message);
+            alert('Error al realizar la orden');
+          }
+      
+      },      
+        async getItemsInYourOrders(id){
+        console.log('getItemsInYourCart ID ', id)
+
+        const API_URL = "http://127.0.0.1:5000"
+        const token = localStorage.getItem("jwt")
+      
+        try {
+          const authStore = useAuthStore() // ← aquí el cambio
+          const userId = authStore.getUserId() // asegúrate de que esto exista
+
+          const response = await axios.get(`${API_URL}/myorders/${userId}/item_ids`)
+          console.log('Respuesta del backend:', response.data)
+          this.itemsIdsinOrders = response.data.id_item
           console.log('response.date enel cartStore', response.data.id_item )
           /////////////////////////
           const storeStore= usestoreStore()
