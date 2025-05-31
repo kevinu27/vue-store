@@ -66,7 +66,7 @@ export const cartStore = defineStore('cartStore', {
 
       },
       async removeItemInYourCart(id){
-        console.log('removeItemInYourCart ID ', id)
+        // console.log('removeItemInYourCart ID ', id)
 
         const API_URL = "http://127.0.0.1:5000"
         const token = localStorage.getItem("jwt")
@@ -121,25 +121,27 @@ export const cartStore = defineStore('cartStore', {
           }
       
       },      
-        async getItemsInYourOrders(id){
-        console.log('getItemsInYourCart ID ', id)
-
+        async getItemsInYourOrders(){
+        console.log('getItemsInYourOrders333333333')
         const API_URL = "http://127.0.0.1:5000"
         const token = localStorage.getItem("jwt")
-      
-        try {
-          const authStore = useAuthStore() // ← aquí el cambio
-          const userId = authStore.getUserId() // asegúrate de que esto exista
+        const authStore = useAuthStore() // ← aquí el cambio
+        const userId = await authStore.getUserId() // asegúrate de que esto exista
+        console.log('userId 44444444444444444444444', userId)
 
+        try {
+          if(userId){
           const response = await axios.get(`${API_URL}/myorders/${userId}/item_ids`)
           console.log('Respuesta del backend:', response.data)
           this.itemsIdsinOrders = response.data.id_item
-          console.log('response.date enel cartStore', response.data.id_item )
+          console.log('response.date enel cartStore------777777', response.data.id_item )
           /////////////////////////
+        
           const storeStore= usestoreStore()
-          storeStore.getItemsByIds(this.itemsIds)
+          storeStore.getItemsByIdsInOrders(response.data.id_item)
 
           return response.data
+        }
       
         } catch (error) {
           console.error('Error al traer los items:', error)

@@ -1,7 +1,16 @@
 <template>
     <div>
       <h1>My Order</h1>
-      <p>Welcome to your orders!</p>
+      <p>Welcome to your orders!777777777</p>
+      <div v-for="item in storeStore.intemsInOrder" :key="item.id">
+          <div class="item-card">
+            name: {{ item.name }}
+            description: {{ item.description }}
+            price: {{ item.price }}
+          </div>
+        </div>
+
+      
     </div>
   </template>
 
@@ -28,10 +37,19 @@ import Carrousell from '@/components/Carrousell.vue'
             console.log('closing modal')
             this.authStore.ShowloginModal()
       },
+      
 
     },
-    mounted() {
-      console.log(`the component UserAccount is now mounted.`)
+    async mounted() {
+      console.log(`the component MYorder----- is now mounted.`)
+      try {
+        await this.authStore.getUserData()
+
+      }catch (error) {
+          console.error('rror cargando el authstore:', error)
+          this.responseMessage = 'error cargando el authstore'
+        }
+
       this.cartStore.getItemsInYourOrders()
 
   

@@ -214,7 +214,6 @@ export const usestoreStore = defineStore('usestoreStore', {
       async getItemsByIds(itemIds){
         const API_URL = "http://127.0.0.1:5000"
         const token = localStorage.getItem("jwt")
-        console.log('------------------!!!!!!!!!!!!!!!!---------------')
 
         try {
           const response = await axios.post(
@@ -228,15 +227,44 @@ export const usestoreStore = defineStore('usestoreStore', {
               }
             }
           );
-          console.log('items del cart:', response.data)
+          console.log('items:', response.data)
           this.intemsInCart =response.data
-          this.intemsInOrder =response.data
+          
           return response.data
 
         } catch (error) {
           console.error('Error al actualizar el item:', error.response?.data || error.message);
         }
       },
+      async getItemsByIdsInOrders(itemIds){
+        const API_URL = "http://127.0.0.1:5000"
+        const token = localStorage.getItem("jwt")
+        console.log('------------------!!!!!!!!!!!!!!!!---------------', itemIds)
+
+        try {
+          const response = await axios.post(
+            `${API_URL}//items_by_ids`,
+            {
+              item_ids: itemIds
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
+            }
+          );
+          console.log('items:', response.data)
+          
+          
+          this.intemsInOrder =response.data
+          console.log('this.intemsInOrder:------********888888888', this.intemsInOrder)
+          return response.data
+
+        } catch (error) {
+          console.error('Error al actualizar el item:', error.response?.data || error.message);
+        }
+      },
+
      async removeItem(id){
         console.log('storeStore remove item id', id)
         const API_URL = "http://127.0.0.1:5000"

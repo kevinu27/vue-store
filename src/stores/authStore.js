@@ -71,6 +71,7 @@ export const useAuthStore = defineStore('auth', {
     } 
   },
     async getUserData(){
+      console.log('////////////////////***********************************************//////////////////////')
         const token = localStorage.getItem("jwt")
     
         if (!token) {
