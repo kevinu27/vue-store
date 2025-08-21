@@ -69,7 +69,12 @@ methods: {
       storeid: this.$route.params.id,
       itemName: this.itemName,
       itemDescription: this.itemDescription, 
-      itemPrice: this.itemPrice
+      itemPrice: this.itemPrice,
+      itemImages: [
+    "https://url.com/imagen1.jpg",
+    "https://url.com/imagen2.jpg"
+  ],
+      discount: 100
     }
     console.log('item bjetct',itemInfo)
     this.storeStore.createItem(itemInfo)

@@ -104,7 +104,10 @@ export const usestoreStore = defineStore('usestoreStore', {
               name: itemInfo.itemName, 
               price: itemInfo.itemPrice, 
               description: itemInfo.itemDescription,
-              store_id: storeid  },
+              store_id: storeid,
+              discount: itemInfo.discount,
+              itemImages: itemInfo.itemImage
+            },
             {
               headers: {
                 "Content-Type": "application/json",
