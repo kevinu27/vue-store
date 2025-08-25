@@ -70,24 +70,25 @@ export const useAuthStore = defineStore('auth', {
           this.responseMessage = 'Failed to submit the form.'
     } 
   },
-    async getUserData(){
-      console.log('////////////////////***********************************************//////////////////////')
-        const token = localStorage.getItem("jwt")
+async getUserData(){
+    console.log('////////////////////***********************************************//////////////////////')
+    const token = localStorage.getItem("jwt")
+
+    if (!token) {
+        console.log( "Not Authenticated ❌")
+        return;
+    }
+
+    const API_URL = "http://127.0.0.1:5000"
     
-        if (!token) {
-            console.log( "Not Authenticated ❌")
-            return;
-        }
-
-
-        const API_URL = "http://127.0.0.1:5000"
+    try {
         const response = await fetch(`${API_URL}/userData`, {  
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`
             }
         });
-    
+
         if (response.ok) {
             const userData = await response.json();
             this.email = userData.email
@@ -96,16 +97,24 @@ export const useAuthStore = defineStore('auth', {
             const cart = cartStore()
             cart.getItemsInYourCart(userData.id)
             const userSettings = userSettingsStore()
-            // userSettings.getSettings(this.id)
             userSettings.getSettings(userData.id)
-            this.isAuthenticated = true;
+            this.isAuthenticated = true
+            
+        } else if (response.status === 401) {
+            // Token is expired or invalid
+            console.log("Token expired or invalid ❌")
+            this.logout(); // This will remove the token and update state
+            // Optionally, you can show a login modal or redirect to login
+            // this.ShowloginModal();
             
         } else {
-            // localStorage.removeItem("jwt")  // Remove invalid token
-            console.log( "Not Authenticated ❌")
+            console.log("Authentication failed ❌")
         }
-
+    } catch (error) {
+        console.error('Error getting user data:', error)
+        console.log( "Not Authenticated ❌")
     }
+}
 
 }
 

@@ -9,6 +9,10 @@
 
             {{ item }}
           </div>
+          {{ item.name }}
+          <div class="image-card"> 
+              <img :src="'http://localhost:5000/' + item.primary_image" alt="">
+          </div>
     </div>
         
       </div>
@@ -114,4 +118,15 @@ import axios from 'axios'
   border: 2px solid red;
 
 }
+
+.image-card{
+  border: 2px solid blue;
+  width: 100%;
+}
+
+ .image-card img {
+  border: 3px solid green;
+  height: 50%;
+  width: 50%;
+  }
 </style>

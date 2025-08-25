@@ -157,7 +157,7 @@ export const usestoreStore = defineStore('usestoreStore', {
           })
 
           this.item = response.data
-          console.log('this.items = response.data', response.data)
+          console.log('this.items = response.data---*-**-*-*', response.data)
           return response.data
       
         } catch (error) {
